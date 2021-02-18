@@ -113,10 +113,7 @@ function Page() {
 				<Toolbar>
 					<Typography className={classes.title} variant="h5" noWrap>
 						GastosApp
-              </Typography>
-					<Typography variant="subtitle1" noWrap>
-						{currentUser && currentUser.email}
-					</Typography>
+              		</Typography>
 					<Tabs className={classes.tabs} value={value} variant="fullWidth" onChange={handleChangeTab} aria-label="full width tabs example" centered>
 						<Tab label="Gastos" {...a11yProps(0)} icon={<AttachMoneyRoundedIcon />} />
 						<Tab label="Resumen" {...a11yProps(1)} icon={<TrendingUpRoundedIcon />} />
