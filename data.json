@@ -1,0 +1,38 @@
+{
+    "categorias": {
+        "Comida": {
+            "comida1": {
+                "id": "c1",
+                "nombre": "Pizza"
+            },
+            "comida2": {
+                "id": "c2",
+                "nombre": "papitas"
+            }
+        },
+        "Entretencion": {
+            "entretencion1": {
+                "id": "e1",
+                "nombre": "juego"
+            },
+            "entretencion2": {
+                "id": "e2",
+                "nombre": "uñitas"
+            }
+        }
+    },
+    "gasto": {
+        "gasto1": {
+            "id": 0,
+            "nombre": "Pizza",
+            "valor": 1000,
+            "descripcion": "ñam"
+        },
+        "gasto2": {
+            "id": 1,
+            "nombre": "vegetales",
+            "valor": 1500,
+            "descripcion": "ñam ñam"
+        }
+    }
+}

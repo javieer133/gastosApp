@@ -1,21 +1,26 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import store from './app/store';
+import ReactDom from 'react-dom';
 import { Provider } from 'react-redux';
-import * as serviceWorker from './serviceWorker';
+import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
+import { SnackbarProvider } from 'notistack';
+import { LoginProvider } from './component/Login/loginProvider'
+import Home from './component/Home';
+import Login from './component/Login/'
+import SingUp from './component/SingUp/SingUp'
 
-ReactDOM.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
-  </React.StrictMode>,
-  document.getElementById('root')
+const Root = (
+  <BrowserRouter>
+    <LoginProvider>
+      <SnackbarProvider maxSnack={3}>
+        <Switch>
+            <Route path="/login" component={Login}/>
+            <Route path="/singUp" component={SingUp}/>
+            <Route path="/home" component={Home}/>
+            <Redirect from="/" to="/login"/>
+        </Switch>
+      </SnackbarProvider>
+    </LoginProvider>
+  </BrowserRouter>  
 );
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+ReactDom.render(Root, document.getElementById('root'));
