@@ -12,6 +12,7 @@
 /build
 
 .eslintcache
+data.json
 
 # misc
 .DS_Store
