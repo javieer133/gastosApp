@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import { Provider } from 'react-redux';
 import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 import { SnackbarProvider } from 'notistack';
 import { LoginProvider } from './component/Login/loginProvider'

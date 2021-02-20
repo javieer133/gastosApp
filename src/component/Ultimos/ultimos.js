@@ -11,6 +11,7 @@ import React, { useEffect } from 'react'
 
 import { db } from '../../config/Firebase'
 import { useState } from 'react';
+import { useAuth } from "../Login/loginProvider";
 
 const useStyles = makeStyles({
     table: {
@@ -27,10 +28,11 @@ const useStyles = makeStyles({
 function Ultimos(){
     const classes = useStyles();
     const [gastos, setGastos] = useState([])
+    const { currentUser } = useAuth();
 
     useEffect(()=>{
         try{
-            db.ref('/gasto').limitToLast(10).on("value", snapShot =>{
+            db.ref(`/gasto/${currentUser?.uid}`).limitToLast(10).on("value", snapShot =>{
                 let data = snapShot.val() ? snapShot.val() : {}
                 setGastos(Object.values(data))
             })
@@ -38,7 +40,7 @@ function Ultimos(){
         catch(e){
             console.log(e)
         }
-    }, [])
+    }, [currentUser])
 
     const format = (val) => {
         return parseInt(val).toLocaleString('de-DE')

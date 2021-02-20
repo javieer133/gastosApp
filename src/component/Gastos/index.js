@@ -73,7 +73,7 @@ function Gastos() {
     const handleClick = (event) => {
         event.preventDefault()
         const ref = db.ref("/")
-        const gastosRef = ref.child(`gasto`);
+        const gastosRef = ref.child(`gasto/${currentUser.uid}`);
         try {
             gastosRef.push({
                 "nombre": values.nombre,
