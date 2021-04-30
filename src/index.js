@@ -8,18 +8,18 @@ import Login from './component/Login/'
 import SingUp from './component/SingUp/SingUp'
 
 const Root = (
-  <BrowserRouter>
-    <LoginProvider>
-      <SnackbarProvider maxSnack={3}>
-        <Switch>
-            <Route path="/login" component={Login}/>
-            <Route path="/singUp" component={SingUp}/>
-            <Route path="/home" component={Home}/>
-            <Redirect from="/" to="/login"/>
-        </Switch>
-      </SnackbarProvider>
-    </LoginProvider>
-  </BrowserRouter>  
+	<BrowserRouter>
+		<LoginProvider>
+			<SnackbarProvider maxSnack={3}>
+				<Switch>
+					<Route path="/login" component={Login} />
+					<Route path="/singUp" component={SingUp} />
+					<Route path="/home" component={Home} />
+					<Redirect from="/" to="/login" />
+				</Switch>
+			</SnackbarProvider>
+		</LoginProvider>
+	</BrowserRouter>
 );
 
 ReactDom.render(Root, document.getElementById('root'));

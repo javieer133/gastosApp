@@ -9,11 +9,13 @@ import {
 	Button,
 	Card,
 	CardContent,
+	CircularProgress,
 	Grid,
 	TextField,
 	Typography,
 } from "@material-ui/core";
 import { AccountCircle } from "@material-ui/icons";
+import LockIcon from '@material-ui/icons/Lock';
 
 import { useAuth } from "../Login/loginProvider";
 
@@ -29,19 +31,21 @@ const useStyles = makeStyles((theme) => ({
 
 function Login() {
 	const classes = useStyles();
-	const { login, currentUser } = useAuth();
+	const { login } = useAuth();
 	const emailRef = useRef();
 	const passwordRef = useRef();
 	const { enqueueSnackbar } = useSnackbar();
 	const [errorEmail, setErrorEmail] = useState({ error: false, errorMsj: "" });
 	const [errorPass, setErrorPass] = useState({ error: false, errorMsj: "" });
+	const [loading, setLoading] = useState(false)
 	const history = useHistory()
 
 	const handleClick = (e) => {
 		e.preventDefault();
-
+		setLoading(true)
 		login(emailRef.current.value, passwordRef.current.value)
 		.then(() =>{
+			setLoading(false)
 			history.push("/home")
 		})
 		.catch((error) => {
@@ -101,7 +105,7 @@ function Login() {
 							<div className={classes.margin}>
 								<Grid container spacing={1} alignItems="flex-end">
 									<Grid item>
-										<AccountCircle />
+										<LockIcon />
 									</Grid>
 									<Grid item>
 										<TextField
@@ -121,13 +125,17 @@ function Login() {
 										<Typography>
 											<Link to={{
 												pathname: "/singUp"
-											}}>¿No tienes Cuenta?</Link>
+											}}>¿No tienes Cuenta? {loading}</Link>
 										</Typography>
 									</Grid>
 									<Grid item>
-										<Button disabled={errorEmail.error || errorPass.error} variant="contained" color="primary" type="submit">
-											Login
-										</Button>
+										{!loading ? 
+											<Button disabled={errorEmail.error || errorPass.error} variant="contained" color="primary" type="submit">
+												Login
+											</Button>
+										:
+										<CircularProgress />
+										}
 									</Grid>
 								</Grid>
 							</div>

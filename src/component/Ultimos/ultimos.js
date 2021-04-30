@@ -14,76 +14,73 @@ import { useState } from 'react';
 import { useAuth } from "../Login/loginProvider";
 
 const useStyles = makeStyles({
-    table: {
-      minWidth: 650,
-    },
-    card: {
-        marginTop: '50px'
-    },
-    title: {
-        fontSize: 20,
-      },
+	table: {
+	  minWidth: 650,
+	},
+	card: {
+		marginTop: '50px'
+	},
+	title: {
+		fontSize: 20,
+	  },
   });
 
 function Ultimos(){
-    const classes = useStyles();
-    const [gastos, setGastos] = useState([])
-    const { currentUser } = useAuth();
+	const classes = useStyles();
+	const [gastos, setGastos] = useState([])
+	const { currentUser } = useAuth();
 
-    useEffect(()=>{
-        try{
-            db.ref(`/gasto/${currentUser?.uid}`).limitToLast(10).on("value", snapShot =>{
-                let data = snapShot.val() ? snapShot.val() : {}
-                setGastos(Object.values(data))
-            })
-        }
-        catch(e){
-            console.log(e)
-        }
-    }, [currentUser])
+	useEffect(()=>{
+		try{
+			db.ref(`/gasto/${currentUser?.uid}`).limitToLast(10).on("value", snapShot =>{
+				let data = snapShot.val() ? snapShot.val() : {}
+				setGastos(Object.values(data))
+			})
+		}
+		catch(e){
+			console.log(e)
+		}
+	}, [currentUser])
 
-    const format = (val) => {
-        return parseInt(val).toLocaleString('de-DE')
-    }
 
-    return (
-        <Card className={classes.card}>
-            <CardContent>
-                <Typography className={classes.title}  color="textPrimary" gutterBottom>
-                    Últimos 10 movimientos
-                </Typography>
-                <TableContainer component={Paper}>
-                    <Table className={classes.table} aria-label="simple table">
-                        <TableHead>
-                        <TableRow>
-                            <TableCell>Producto</TableCell>
-                            <TableCell align="right">Monto ($)</TableCell>
-                            <TableCell align="right">Descripción</TableCell>
-                            <TableCell align="right">Categoría</TableCell>
-                            <TableCell align="right">SubCategoría</TableCell>
-                            <TableCell align="right">Ingreso/Egreso</TableCell>
-                        </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {gastos.map( (row, i) => (
-                                <TableRow key={i}>
-                                    <TableCell component="th" scope="row">
-                                        {row.nombre}    
-                                    </TableCell>
-                                    <TableCell align="right">${row.valor ? format(row.valor) : 0}</TableCell>
-                                    <TableCell align="right">{row.descripcion}</TableCell>
-                                    <TableCell align="right">{row.categoria}</TableCell>
-                                    <TableCell align="right">{row.categoria}</TableCell>
-                                    <TableCell align="right">{row.origen}</TableCell>
-                                </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-                <Typography>{gastos.length < 1 ? "No hay datos" : ""}</Typography>
-            </CardContent>
-        </Card>
-    );
+	return (
+		<Card className={classes.card}>
+			<CardContent>
+				<Typography className={classes.title}  color="textPrimary" gutterBottom>
+					Últimos 10 movimientos
+				</Typography>
+				<TableContainer component={Paper}>
+					<Table className={classes.table} aria-label="simple table">
+						<TableHead>
+						<TableRow>
+							<TableCell>Producto</TableCell>
+							<TableCell align="right">Monto ($)</TableCell>
+							<TableCell align="right">Descripción</TableCell>
+							<TableCell align="right">Categoría</TableCell>
+							<TableCell align="right">SubCategoría</TableCell>
+							<TableCell align="right">Ingreso/Egreso</TableCell>
+						</TableRow>
+						</TableHead>
+						<TableBody>
+							{gastos.map( (row, i) => (
+								<TableRow key={i}>
+									<TableCell component="th" scope="row">
+										{row.nombre}    
+									</TableCell>
+									<TableCell align="right">${row.valor}</TableCell>
+									<TableCell align="right">{row.descripcion}</TableCell>
+									<TableCell align="right">{row.categoria}</TableCell>
+									<TableCell align="right">{row.categoria}</TableCell>
+									<TableCell align="right">{row.origen}</TableCell>
+								</TableRow>
+							))}
+						</TableBody>
+					</Table>
+				</TableContainer>
+				<Typography>{gastos.length < 1 ? "No hay datos" : ""}</Typography>
+			</CardContent>
+		</Card>
+	);
 }
 
 export default Ultimos;

@@ -3,11 +3,11 @@ import NavBar from '../NavBar';
 
 
 function Home(props){
-    return (
-        <Fragment>
-            <NavBar></NavBar>
-        </Fragment>
-    )
+	return (
+		<Fragment>
+			<NavBar></NavBar>
+		</Fragment>
+	)
 }
 
 export default Home;

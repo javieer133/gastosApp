@@ -13,6 +13,7 @@
 
 .eslintcache
 data.json
+.vscode
 
 # misc
 .DS_Store

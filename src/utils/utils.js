@@ -1,5 +1,4 @@
-const map = {
-    {
-        'auth/wrong-password': "Contraseña incorrecta"
-    }
-}
+const map = 
+	{
+		'auth/wrong-password' : "Contraseña incorrecta"
+	}	
